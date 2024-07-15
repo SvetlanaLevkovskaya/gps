@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import { ENV } from '../configs/enviorement.ts'
+import { FormData } from '../../types'
 import { ApiRoutes } from '../configs/routes.ts'
 
 export const handleApiError = (error: unknown): string => {
@@ -25,7 +25,7 @@ export const handleApiError = (error: unknown): string => {
 const instanceAxios = axios.create({
   baseURL: '/api',
   headers: {
-    'Content-Type': 'application/json; charset=utf8',
+    'Content-Type': 'application/x-www-form-urlencoded; charset=utf8',
   },
   withCredentials: true,
   paramsSerializer: {
@@ -43,8 +43,9 @@ instanceAxios.interceptors.response.use(
 
 export const apiClientService = {
   getAllDevices: async () => {
-    return instanceAxios.get(ApiRoutes.devices, {
-      headers: { Authorization: `Bearer ${ENV.token}` },
-    })
+    return instanceAxios.get(ApiRoutes.devices)
+  },
+  login: async (data: FormData) => {
+    return instanceAxios.post(ApiRoutes.session, data)
   },
 }
