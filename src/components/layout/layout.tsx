@@ -10,7 +10,7 @@ const Layout: FC = () => {
   return (
     <div>
       {!isLoginPage && <AppBar />}
-      <main>
+      <main className="mt-6">
         <Outlet />
       </main>
     </div>

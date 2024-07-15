@@ -1,5 +1,7 @@
 import { FC } from 'react'
 
+import { Container } from '@mui/material'
+
 export const HomePage: FC = () => {
-  return <div>HomePage</div>
+  return <Container maxWidth="xl">HomePage</Container>
 }

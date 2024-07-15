@@ -104,44 +104,21 @@ export const AppBar: FC = () => {
             ))}
           </Tabs>
 
-          <Box
-            sx={{
-              flexGrow: 1,
-              marginLeft: { xs: '24px', md: '0' },
-            }}
-          />
+          <Box sx={{ flexGrow: 1, marginLeft: { xs: '24px', md: '0' } }} />
 
-          <IconButton
-            color="inherit"
-            sx={{
-              display: { xs: 'none', md: 'flex' },
-            }}
-          >
+          <IconButton color="inherit" sx={{ display: { xs: 'none', md: 'flex' } }}>
             <NotificationsNoneOutlinedIcon />
           </IconButton>
 
           <button onClick={handleClick} style={buttonStyle}>
             <Box sx={iconBoxStyle}>
-              <PermIdentityOutlinedIcon
-                sx={{
-                  color: 'inherit',
-                }}
-              />
+              <PermIdentityOutlinedIcon sx={{ color: 'inherit' }} />
             </Box>
 
-            <Typography
-              variant="body2"
-              sx={{
-                display: { xs: 'none', md: 'flex' },
-              }}
-            >
+            <Typography variant="body2" sx={{ display: { xs: 'none', md: 'flex' } }}>
               Имя пользователя
             </Typography>
-            <KeyboardArrowDownOutlinedIcon
-              sx={{
-                display: { xs: 'none', md: 'flex' },
-              }}
-            />
+            <KeyboardArrowDownOutlinedIcon sx={{ display: { xs: 'none', md: 'flex' } }} />
           </button>
 
           <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>

@@ -42,8 +42,17 @@ instanceAxios.interceptors.response.use(
 )
 
 export const apiClientService = {
-  getAllDevices: async () => {
-    return instanceAxios.get(ApiRoutes.devices)
+  getAllDevices: async (ids?: { params: { id: string } }) => {
+    let params = {}
+    if (ids && ids.params.id) {
+      const idString = ids.params.id.trim()
+      const idArray = idString
+        .split(',')
+        .map((id) => id.trim())
+        .filter((id, index, self) => self.indexOf(id) === index && id !== '')
+      params = { id: idArray }
+    }
+    return instanceAxios.get(ApiRoutes.devices, { params })
   },
   login: async (data: FormData) => {
     return instanceAxios.post(ApiRoutes.session, data)
