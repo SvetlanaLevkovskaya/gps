@@ -6,4 +6,10 @@ export const ApiRoutes = {
 export const AppRoutes = {
   home: '/',
   login: '/login',
+  objects: '/objects',
+  accounts: '/accounts',
+  users: '/users',
+  drivers: '/drivers',
+  notifications: '/notifications',
+  tasks: '/tasks',
 }
