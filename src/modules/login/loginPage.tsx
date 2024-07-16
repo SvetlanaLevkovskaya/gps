@@ -29,7 +29,7 @@ export const LoginPage: FC = () => {
 
   const isSubmitDisabled = !email || !password
 
-  const onSubmit: SubmitHandler = async ({ email, password }) => {
+  const onSubmit: SubmitHandler<FormData> = async ({ email, password }) => {
     try {
       const response = await apiClientService.login({ email, password })
 
