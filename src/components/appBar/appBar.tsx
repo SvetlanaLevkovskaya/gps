@@ -85,22 +85,12 @@ export const AppBar: FC = () => {
             value={location.pathname}
             onChange={handleTabChange}
             textColor="inherit"
-            indicatorColor="inherit"
+            indicatorColor="primary"
             variant="scrollable"
             scrollButtons="auto"
           >
             {links.map((link, index) => (
-              <Tab
-                key={index}
-                label={link.label}
-                value={link.to}
-                sx={{
-                  padding: '22px',
-                  color: location.pathname === link.to ? '#00dbb6' : 'inherit',
-                  borderBottom: location.pathname === link.to ? '2px solid #00dbb6' : 'inherit',
-                  textTransform: 'capitalize',
-                }}
-              />
+              <Tab key={index} label={link.label} value={link.to} />
             ))}
           </Tabs>
 
@@ -121,7 +111,16 @@ export const AppBar: FC = () => {
             <KeyboardArrowDownOutlinedIcon sx={{ display: { xs: 'none', md: 'flex' } }} />
           </button>
 
-          <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+          <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            sx={{
+              '& .MuiPaper-root': {
+                width: '200px',
+              },
+            }}
+          >
             <MenuItem onClick={handleLogout}>Logout</MenuItem>
           </Menu>
         </Toolbar>

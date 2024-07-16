@@ -50,7 +50,6 @@ export const LoginPage: FC = () => {
               helperText={errors.email?.message}
               fullWidth
               size="small"
-              color="warning"
               focused
             />
 
@@ -62,7 +61,6 @@ export const LoginPage: FC = () => {
               helperText={errors.password?.message}
               fullWidth
               size="small"
-              color="warning"
             />
           </div>
           {authError && <div className="text-sm text-rose-700">{authError}</div>}
@@ -71,7 +69,6 @@ export const LoginPage: FC = () => {
             variant="contained"
             fullWidth
             className="w-full"
-            color="primary"
             disabled={isSubmitDisabled}
           >
             LOGIN

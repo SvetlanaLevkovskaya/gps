@@ -27,12 +27,12 @@ export const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
   return (
     <Box mb={2}>
       <TextField
-        label="Search by ID(s)"
+        label="Поиск по ID"
         size="small"
         variant="outlined"
         value={searchValue}
         onChange={(e) => setSearchValue(e.target.value)}
-        placeholder="Enter comma-separated IDs (e.g., 31,42)"
+        placeholder="1 или 1,2"
         InputProps={{
           endAdornment: (
             <InputAdornment position="end">
@@ -41,6 +41,14 @@ export const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
               </IconButton>
             </InputAdornment>
           ),
+        }}
+        sx={{
+          '& .MuiFormLabel-root': {
+            fontSize: '0.875rem',
+          },
+          '& .MuiInputBase-input::placeholder': {
+            fontSize: '0.875rem',
+          },
         }}
       />
       {error && <Typography color="error">{error}</Typography>}
