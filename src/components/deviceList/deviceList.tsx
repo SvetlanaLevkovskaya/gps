@@ -1,7 +1,6 @@
-import { FC, useEffect, useState } from 'react'
+import { FC } from 'react'
 
 import {
-  Container,
   Paper,
   Table,
   TableBody,
@@ -9,14 +8,15 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from '@mui/material'
 
-import { apiClientService } from '../../lib/api/axios.ts'
+import { RequestStatus } from '../../store/device/types.ts'
 import { Device } from '../../types'
-import { SearchBar } from '../searchBar/searchBar.tsx'
 
 interface DeviceListProps {
   devices?: Device[]
+  searchStatus: RequestStatus
 }
 
 const columns = [
@@ -27,34 +27,9 @@ const columns = [
   { id: 'lastUpdate', label: 'Last Update' },
 ]
 
-export const DeviceList: FC = ({ devices }) => {
-  const [data, setData] = useState<Device[] | null>(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await apiClientService.getAllDevices()
-        setData(response.data)
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
-    }
-
-    if (!devices) {
-      fetchData()
-    }
-  }, [devices])
-
-  const displayedData = devices || data
-
-  const handleSearch = (searchedDevices: Device[]) => {
-    console.log('searchedDevices', searchedDevices)
-    setData(searchedDevices)
-  }
-
+export const DeviceList: FC<DeviceListProps> = ({ devices = [], searchStatus }) => {
   return (
-    <Container maxWidth="xl">
-      <SearchBar onSearch={handleSearch} />
+    <>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
@@ -67,8 +42,24 @@ export const DeviceList: FC = ({ devices }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {displayedData ? (
-              displayedData.map((device) => (
+            {searchStatus === 'loading' ? (
+              <TableRow>
+                <TableCell colSpan={columns.length}>
+                  <Typography align="center" color="textSecondary" fontSize="inherit">
+                    Загрузка...
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            ) : searchStatus === 'failed' || devices.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={columns.length}>
+                  <Typography align="center" color="textSecondary" fontSize="inherit">
+                    Объекты не найдены
+                  </Typography>
+                </TableCell>
+              </TableRow>
+            ) : (
+              devices.map((device) => (
                 <TableRow key={device.id}>
                   {columns.map((column) => (
                     <TableCell key={column.id}>
@@ -79,14 +70,10 @@ export const DeviceList: FC = ({ devices }) => {
                   ))}
                 </TableRow>
               ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length}>Loading...</TableCell>
-              </TableRow>
             )}
           </TableBody>
         </Table>
       </TableContainer>
-    </Container>
+    </>
   )
 }

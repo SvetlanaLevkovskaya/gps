@@ -19,6 +19,8 @@ import {
 } from '@mui/material'
 
 import { AppRoutes } from '../../lib/configs/routes.ts'
+import { useAppDispatch } from '../../store'
+import { userActions } from '../../store/user'
 import { getEmail } from '../../store/user/selectors.ts'
 
 interface LinkItem {
@@ -60,18 +62,16 @@ const iconBoxStyle = {
 export const AppBar: FC = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const dispatch = useAppDispatch()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const email = useSelector(getEmail)
 
-  console.log('email', email)
-
   const handleLogout = () => {
-    localStorage.removeItem('email')
-    navigate(AppRoutes.login)
+    dispatch(userActions.logout())
   }
 
-  const handleClick = (event: React.MouseEvent) => {
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
 

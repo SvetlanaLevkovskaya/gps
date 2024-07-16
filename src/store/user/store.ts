@@ -11,6 +11,11 @@ const userSlice = createSlice({
       localStorage.setItem('email', payload)
       state.email = payload
     },
+    logout: (state) => {
+      localStorage.removeItem('email')
+      state.email = null
+      state.isLoggedOut = true
+    },
   },
 })
 

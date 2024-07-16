@@ -1,9 +1,9 @@
 import { RouteObject, createBrowserRouter } from 'react-router-dom'
 
-import { DeviceList } from '../../components/deviceList/deviceList.tsx'
 import Layout from '../../components/layout/layout.tsx'
 import { LoginRoute } from '../../components/loginRoute/loginRoute.tsx'
 import { ProtectedRoute } from '../../components/protectedRoute/protectedRoute.tsx'
+import { DevicePage } from '../../modules/device/devicePage.tsx'
 import { HomePage } from '../../modules/home/homePage'
 import { LoginPage } from '../../modules/login/loginPage'
 
@@ -36,7 +36,7 @@ export const appRoutersConfig = createBrowserRouter([
       },
       {
         path: AppRoutes.objects,
-        element: <DeviceList />,
+        element: <DevicePage />,
       },
       {
         path: AppRoutes.accounts,

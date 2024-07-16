@@ -1,6 +1,8 @@
 import { FC } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 
+import { Container } from '@mui/material'
+
 import { AppBar } from '../appBar/appBar.tsx'
 
 const Layout: FC = () => {
@@ -11,7 +13,9 @@ const Layout: FC = () => {
     <div>
       {!isLoginPage && <AppBar />}
       <main className="mt-6">
-        <Outlet />
+        <Container maxWidth="xl">
+          <Outlet />
+        </Container>
       </main>
     </div>
   )

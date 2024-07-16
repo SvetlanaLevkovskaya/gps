@@ -1,29 +1,38 @@
 import { FC, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 
-import { apiClientService } from '../../lib/api/axios.ts'
-import { Device } from '../../types'
+import { getError } from '../../store/device/selectors.ts'
 
 interface SearchBarProps {
-  onSearch: (devices: Device[]) => void
+  onSearch: (searchValue: string) => void
 }
 
-export const SearchBar: FC = ({ onSearch }) => {
+export const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
   const [searchValue, setSearchValue] = useState<string>('')
-  const [error, setError] = useState<string | null>(null)
+  const error = useSelector(getError)
 
-  const handleSearch = async () => {
-    try {
-      const response = await apiClientService.getAllDevices({ params: { id: searchValue } })
-      onSearch(response.data)
-      setError(null)
-    } catch (error) {
-      setError('Ошибка при получении данных')
-      onSearch([])
+  const handleSearch = () => {
+    if (searchValue) {
+      onSearch(searchValue)
     }
   }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value)
+    if (e.target.value === '') {
+      onSearch('')
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSearch()
+    }
+  }
+
   return (
     <Box mb={2}>
       <TextField
@@ -31,7 +40,8 @@ export const SearchBar: FC = ({ onSearch }) => {
         size="small"
         variant="outlined"
         value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
+        onKeyDown={handleKeyDown}
+        onChange={handleChange}
         placeholder="1 или 1,2"
         InputProps={{
           endAdornment: (
@@ -51,7 +61,11 @@ export const SearchBar: FC = ({ onSearch }) => {
           },
         }}
       />
-      {error && <Typography color="error">{error}</Typography>}
+      {error && (
+        <Typography color="error" fontSize={14}>
+          Ошибка при запросе данных
+        </Typography>
+      )}
     </Box>
   )
 }

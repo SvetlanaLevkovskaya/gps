@@ -8,7 +8,7 @@ import { getEmail } from '../../store/user/selectors.ts'
 export const LoginRoute: FC<PropsWithChildren> = ({ children }) => {
   const email = useSelector(getEmail)
   if (email) {
-    return <Navigate to={AppRoutes.home} />
+    return <Navigate to={AppRoutes.objects} />
   }
   return children
 }
