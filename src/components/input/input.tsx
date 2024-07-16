@@ -1,20 +1,14 @@
 import { ChangeEventHandler, FC, InputHTMLAttributes } from 'react'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
-interface CustomInputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface CustomInputProps extends InputHTMLAttributes {
   label?: string
-  register?: UseFormRegisterReturn<string>
-  onChange?: ChangeEventHandler<HTMLInputElement>
+  register?: UseFormRegisterReturn
+  onChange?: ChangeEventHandler
   error?: string | boolean
 }
 
-export const Input: FC<CustomInputProps> = ({
-  label,
-  register,
-  onChange: onChangeInput,
-  error,
-  ...props
-}) => {
+export const Input: FC = ({ label, register, onChange: onChangeInput, error, ...props }) => {
   return (
     <>
       <div>

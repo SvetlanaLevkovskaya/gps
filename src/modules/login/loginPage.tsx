@@ -6,7 +6,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Button, TextField } from '@mui/material'
 
 import { apiClientService } from '../../lib/api/axios.ts'
+import { AppRoutes } from '../../lib/configs/routes.ts'
 import { validationSchema } from '../../lib/utils/validationSchema.ts'
+import { useAppDispatch } from '../../store'
+import { userActions } from '../../store/user'
 import { FormData } from '../../types'
 
 export const LoginPage: FC = () => {
@@ -19,18 +22,20 @@ export const LoginPage: FC = () => {
 
   const [authError, setAuthError] = useState('')
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
 
   const email = useWatch({ control, name: 'email', defaultValue: '' })
   const password = useWatch({ control, name: 'password', defaultValue: '' })
 
   const isSubmitDisabled = !email || !password
 
-  const onSubmit: SubmitHandler<FormData> = async ({ email, password }) => {
+  const onSubmit: SubmitHandler = async ({ email, password }) => {
     try {
       const response = await apiClientService.login({ email, password })
 
       if (response.status === 200) {
-        navigate('/')
+        dispatch(userActions.setEmail(email))
+        navigate(AppRoutes.objects)
       }
     } catch (error) {
       setAuthError('Ошибка авторизации. Проверьте почту и пароль.')

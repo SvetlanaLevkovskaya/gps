@@ -1,11 +1,11 @@
 import { ButtonHTMLAttributes, FC, ReactNode } from 'react'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends ButtonHTMLAttributes {
   variant?: 'primary' | 'secondary' | 'remove' | 'action' | 'pagination'
   children: ReactNode
 }
 
-export const Button: FC<ButtonProps> = ({ variant = 'primary', children, className, ...props }) => {
+export const Button: FC = ({ variant = 'primary', children, className, ...props }) => {
   const baseStyles = 'rounded-md font-medium text-base transition duration-200'
 
   let variantStyles

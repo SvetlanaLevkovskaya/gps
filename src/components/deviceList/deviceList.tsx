@@ -27,7 +27,7 @@ const columns = [
   { id: 'lastUpdate', label: 'Last Update' },
 ]
 
-export const DeviceList: FC<DeviceListProps> = ({ devices }) => {
+export const DeviceList: FC = ({ devices }) => {
   const [data, setData] = useState<Device[] | null>(null)
 
   useEffect(() => {

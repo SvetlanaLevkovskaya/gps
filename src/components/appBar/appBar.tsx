@@ -1,4 +1,5 @@
 import { FC, SyntheticEvent, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
@@ -18,6 +19,7 @@ import {
 } from '@mui/material'
 
 import { AppRoutes } from '../../lib/configs/routes.ts'
+import { getEmail } from '../../store/user/selectors.ts'
 
 interface LinkItem {
   to: string
@@ -60,12 +62,16 @@ export const AppBar: FC = () => {
   const location = useLocation()
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
+  const email = useSelector(getEmail)
+
+  console.log('email', email)
 
   const handleLogout = () => {
+    localStorage.removeItem('email')
     navigate(AppRoutes.login)
   }
 
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+  const handleClick = (event: React.MouseEvent) => {
     setAnchorEl(event.currentTarget)
   }
 
@@ -90,7 +96,23 @@ export const AppBar: FC = () => {
             scrollButtons="auto"
           >
             {links.map((link, index) => (
-              <Tab key={index} label={link.label} value={link.to} />
+              <Tab
+                key={index}
+                label={
+                  <Box>
+                    {link.label}
+                    {link.additional && (
+                      <Typography
+                        variant="caption"
+                        sx={{ color: 'orange', textTransform: 'lowercase', fontSize: 'inherit' }}
+                      >
+                        {link.additional}
+                      </Typography>
+                    )}
+                  </Box>
+                }
+                value={link.to}
+              />
             ))}
           </Tabs>
 
@@ -106,7 +128,7 @@ export const AppBar: FC = () => {
             </Box>
 
             <Typography variant="body2" sx={{ display: { xs: 'none', md: 'flex' } }}>
-              Имя пользователя
+              {email || 'Имя пользователя'}
             </Typography>
             <KeyboardArrowDownOutlinedIcon sx={{ display: { xs: 'none', md: 'flex' } }} />
           </button>

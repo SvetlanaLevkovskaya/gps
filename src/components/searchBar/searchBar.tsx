@@ -10,7 +10,7 @@ interface SearchBarProps {
   onSearch: (devices: Device[]) => void
 }
 
-export const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
+export const SearchBar: FC = ({ onSearch }) => {
   const [searchValue, setSearchValue] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
 
