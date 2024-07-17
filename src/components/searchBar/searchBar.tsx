@@ -1,37 +1,20 @@
-import { FC, useState } from 'react'
+import { FC, memo } from 'react'
 import { useSelector } from 'react-redux'
 
 import SearchIcon from '@mui/icons-material/Search'
 import { Box, IconButton, InputAdornment, TextField, Typography } from '@mui/material'
 
+import { useSearch } from '../../hooks/useSearch.ts'
 import { getError } from '../../store/device/selectors.ts'
 
 interface SearchBarProps {
-  onSearch: (searchValue: string) => void
+  clearSearch: (searchValue: string) => void
 }
 
-export const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
-  const [searchValue, setSearchValue] = useState<string>('')
+export const SearchBar: FC<SearchBarProps> = memo(({ clearSearch }) => {
   const error = useSelector(getError)
 
-  const handleSearch = () => {
-    if (searchValue) {
-      onSearch(searchValue)
-    }
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(e.target.value)
-    if (e.target.value === '') {
-      onSearch('')
-    }
-  }
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
-      handleSearch()
-    }
-  }
+  const { searchValue, handleChange, handleKeyDown, handleSearch } = useSearch(clearSearch)
 
   return (
     <Box mb={2}>
@@ -68,4 +51,4 @@ export const SearchBar: FC<SearchBarProps> = ({ onSearch }) => {
       )}
     </Box>
   )
-}
+})
