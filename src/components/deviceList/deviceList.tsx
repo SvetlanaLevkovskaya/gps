@@ -9,7 +9,7 @@ import { DeviceListBody } from './deviceListBody/deviceListBody.tsx'
 import { DeviceListHeader } from './deviceListHeader/deviceListHeader.tsx'
 
 interface DeviceListProps {
-  devices?: Device[]
+  devices: Device[]
   searchStatus: RequestStatus
 }
 

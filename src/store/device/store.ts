@@ -10,10 +10,10 @@ const deviceSlice = createSlice({
   name: deviceStateName,
   initialState: deviceInitialState,
   reducers: {
-    setDevices(state, { payload }: PayloadAction<Device[]>) {
+    setDevices(state: DeviceState, { payload }: PayloadAction<Device[]>) {
       state.devices = payload
     },
-    clearSearchedDevices(state) {
+    clearSearchedDevices(state: DeviceState) {
       state.searchedDevices = []
       state.searchStatus = 'idle'
       state.error = null
