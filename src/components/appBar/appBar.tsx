@@ -94,6 +94,11 @@ export const AppBar: FC = () => {
             indicatorColor="primary"
             variant="scrollable"
             scrollButtons="auto"
+            sx={{
+              '& .MuiTab-root': {
+                maxHeight: 65.5,
+              },
+            }}
           >
             {links.map((link, index) => (
               <Tab

@@ -9,7 +9,7 @@ export const HomePage: FC = () => {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-[calc(100vh-82px)]">
-      <RatingInput defaultValue={1} onChange={handleRatingChange} />
+      <RatingInput defaultValue={5} onChange={handleRatingChange} />
     </div>
   )
 }

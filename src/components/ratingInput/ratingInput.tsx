@@ -27,7 +27,7 @@ const RatingInput: React.FC<RatingInputProps> = ({ defaultValue = 0, onChange })
   const stars = [1, 2, 3, 4, 5]
 
   return (
-    <div className="flex items-center space-x-1">
+    <div className="flex justify-center space-x-1">
       {stars.map((star) => (
         <svg
           key={star}
@@ -42,7 +42,7 @@ const RatingInput: React.FC<RatingInputProps> = ({ defaultValue = 0, onChange })
           <path d="M12 2l2.39 4.85 5.35.78-3.87 3.77.91 5.3L12 13.3l-4.78 2.51.91-5.3-3.87-3.77 5.35-.78L12 2z" />
         </svg>
       ))}
-      <span className="ml-2 text-sm text-gray-600">{rating}</span>
+      <span className="ml-2 text-sm text-gray-600 ">{rating}</span>
     </div>
   )
 }
