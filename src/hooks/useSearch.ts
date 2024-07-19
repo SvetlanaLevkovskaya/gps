@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { ChangeEvent, KeyboardEvent, useCallback, useState } from 'react'
 
 import { useAppDispatch } from '../store'
 import { searchDevices } from '../store/device/thunks'
@@ -15,14 +15,14 @@ export const useSearch = (clearSearch: () => void) => {
     }
   }, [searchValue, dispatch, clearSearch])
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value)
-    if (!e.target.value) {
+    if (e.target.value) {
       clearSearch()
     }
   }
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Enter') {
       handleSearch()
     }

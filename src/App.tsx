@@ -1,40 +1,14 @@
 import { FC } from 'react'
 import { RouterProvider } from 'react-router-dom'
 
-import { ThemeProvider, createTheme } from '@mui/material'
+import { ThemeProvider } from '@mui/material'
 
 import { appRoutersConfig } from './lib/configs/routerConfig.tsx'
-
-const theme = createTheme({
-  components: {
-    MuiTabs: {
-      styleOverrides: {
-        root: {},
-        indicator: {
-          backgroundColor: '#00dbb6',
-        },
-      },
-    },
-    MuiTab: {
-      styleOverrides: {
-        root: {
-          textTransform: 'capitalize',
-          '&.Mui-selected': {
-            color: '#00dbb6',
-            padding: '24px',
-          },
-        },
-      },
-    },
-  },
-  palette: {
-    primary: { main: '#00dbb6', contrastText: '#fff' },
-  },
-})
+import { themeConfig } from './lib/theme/config.ts'
 
 const App: FC = () => {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={themeConfig}>
       <RouterProvider router={appRoutersConfig}></RouterProvider>
     </ThemeProvider>
   )

@@ -42,10 +42,10 @@ instanceAxios.interceptors.response.use(
 )
 
 export const apiClientService = {
-  getAllDevices: async (ids?: { params: { id: string } }) => {
+  getAllDevices: async (ids?: { id: string }) => {
     let params = {}
-    if (ids && ids.params.id) {
-      const idString = ids.params.id.trim()
+    if (ids && ids.id) {
+      const idString = ids.id.trim()
       const idArray = idString
         .split(',')
         .map((id) => id.trim())

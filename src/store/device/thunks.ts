@@ -20,7 +20,7 @@ export const searchDevices = createAsyncThunk<Device[], string, { rejectValue: s
   'devices/searchDevices',
   async (searchValue, { rejectWithValue }) => {
     try {
-      const response = await apiClientService.getAllDevices({ params: { id: searchValue } })
+      const response = await apiClientService.getAllDevices({ id: searchValue })
       return response.data
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown error'

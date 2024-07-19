@@ -10,10 +10,10 @@ const Layout: FC = () => {
   const isLoginPage = location.pathname === '/login'
 
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
       {!isLoginPage && <AppBar />}
-      <main className="mt-6">
-        <Container maxWidth="xl">
+      <main className="flex-1">
+        <Container maxWidth="xl" sx={{ marginTop: '16px' }}>
           <Outlet />
         </Container>
       </main>
